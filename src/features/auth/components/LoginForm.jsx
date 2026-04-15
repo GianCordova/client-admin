@@ -1,30 +1,46 @@
-export const LoginForm = ({ onSwitchRegister, onSwitchForgot }) => {
+export const LoginForm = ({ onForgot }) => {
     return (
         <form className="space-y-5">
-            {/* ... inputs de email y contraseña igual ... */}
+            {/* Sección de de email o usuario */}
             <div>
-                <label className="block text-sm font-medium text-gray-800 mb-1.5">Email o Usuario</label>
-                <input className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none" />
+                <label className="block text-sm font-medium text-gray-800 mb-1.5">
+                    Email o Usuario
+                </label>
+                <input
+                    type="text"
+                    placeholder="correo@ejemplo.com o usuario"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
             </div>
 
+            {/* Sección de de contraseña */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Contraseña</label>
-                <input type="password" className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none" />
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Contraseña
+                </label>
+                <input
+                    type="password"
+                    placeholder="••••••••"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
             </div>
 
-            <button className="w-full bg-white hover:bg-blue-600 text-gray-800 font-medium py-2.5 px-4 rounded-lg transition-colors duration-200 text-sm">
+            <button
+                type="submit"
+                className="w-full bg-main-blue hover:opacity-90 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-200 text-sm"
+            >
                 Iniciar Sesión
             </button>
 
-            <div className="flex justify-between text-sm mt-2">
-                <button type="button" onClick={onSwitchForgot} className="text-blue-600 hover:underline">
-                    ¿Olvidaste tu contraseña?
+            <p className="text-center text-sm">
+                <button
+                    type="button"
+                    onClick={onForgot}
+                    className="text-main-blue hover:underline"
+                >
+                ¿Olvidaste tu contraseña?
                 </button>
-
-                <button type="button" onClick={onSwitchRegister} className="text-blue-600 hover:underline">
-                    Registrarse
-                </button>
-            </div>
+            </p>
         </form>
     );
 };

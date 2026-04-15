@@ -10,19 +10,19 @@ import { Sidebar } from "./Sidebar";
 
 
 // features/fields
-//import { Fields } from "../../../features/fields/components/Fields";
-//import { FieldModal } from "../../../features/fields/components/FieldModal";
+// import { Fields } from "../../../features/fields/components/Fields";
+// import { FieldModal } from "../../../features/fields/components/FieldModal";
 
 // features/teams
 //import { TeamModal } from "../../../features/teams/components/TeamModal";
 //import { Teams } from "../../../features/teams/components/Teams";
 
 //features/reservations
-import { Reservations } from "../../../features/reservations/components/Reservations";
+//import { Reservations } from "../../../features/reservations/components/Reservations";
 
 // features/tournaments
-//import { TournamentModal } from "../../../features/tournaments/components/TournamentModal";
-//import { Tournaments } from "../../../features/tournaments/components/Tournaments";
+import { TournamentModal } from "../../../features/tournaments/components/TournamentModal";
+import { Tournaments } from "../../../features/tournaments/components/Tournaments";
 
 // features/userAdmin
 //import { Fields } from "../../../features/userAdmin/components/Fields";
@@ -60,12 +60,12 @@ export const DashboardContainer = () => {
           {/* <Fields/> */}
           {/* <FieldModal/> */}
 
-          <Reservations />
+          {/* <Reservations /> */}
 
           {/* <TeamModal /> */}
           {/* <Teams /> */}
 
-          {/* <TournamentModal /> */}
+          <TournamentModal />
           {/* <Tournaments /> */}
 
           {/* <Fields /> */}
