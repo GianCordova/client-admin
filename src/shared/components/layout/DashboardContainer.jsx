@@ -1,5 +1,6 @@
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
+import { Outlet } from "react-router-dom";
 
 // VISTAS
 
@@ -21,8 +22,8 @@ import { Sidebar } from "./Sidebar";
 //import { Reservations } from "../../../features/reservations/components/Reservations";
 
 // features/tournaments
-import { TournamentModal } from "../../../features/tournaments/components/TournamentModal";
-import { Tournaments } from "../../../features/tournaments/components/Tournaments";
+// import { TournamentModal } from "../../../features/tournaments/components/TournamentModal";
+// import { Tournaments } from "../../../features/tournaments/components/Tournaments";
 
 // features/userAdmin
 //import { Fields } from "../../../features/userAdmin/components/Fields";
@@ -45,41 +46,13 @@ import { Tournaments } from "../../../features/tournaments/components/Tournament
 export const DashboardContainer = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Navbar */}
-      <Navbar/ > 
+      <Navbar /> 
 
       <div className="flex flex-1">
-        {/* Sidebar */}
         <Sidebar />
         
         <main className="flex-1 p-6">
-          {/* <Spinner/> */}
-          {/* <ResetPasswordForm /> */}
-          {/* <ShowConfirmToast /> */}
-
-          {/* <Fields/> */}
-          {/* <FieldModal/> */}
-
-          {/* <Reservations /> */}
-
-          {/* <TeamModal /> */}
-          {/* <Teams /> */}
-
-          <TournamentModal />
-          {/* <Tournaments /> */}
-
-          {/* <Fields /> */}
-          {/* <Reservations /> */}
-          {/* <Teams /> */}
-          {/* <Tournaments /> */}
-
-          {/* <Settings /> */}
-
-          {/* <CreateUserModal /> */}
-          {/* <Settings /> */}
-          {/* <UserComboBox /> */}
-          {/* <UserDetailModal /> */}
-          {/* <Users /> */}
+          <Outlet />
 
         </main>
       </div>

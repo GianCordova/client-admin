@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-export const LoginForm = ({ onForgot }) => {
 
+export const LoginForm = ({ onForgot }) => {
     const navigate = useNavigate();
 
     const login = useAuthStore((state) => state.login);
@@ -17,11 +17,11 @@ export const LoginForm = ({ onForgot }) => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async (data) =>{
+    const onSubmit = async (data) => {
         const res = await login(data);
-        if(res.success){
+        if (res.success) {
             navigate("/dashboard");
-            toast.success("¡Bienvenido de nuevo!");
+            toast.success("¡Bienvenido de nuevo!", { duration: 4000 });
         }
     };
 
@@ -36,6 +36,7 @@ export const LoginForm = ({ onForgot }) => {
                     type="text"
                     placeholder="correo@ejemplo.com o usuario"
                     className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    
                     {...register("emailOrUsername", {
                         required: "Este campo es obligatorio",
                     })}
@@ -51,18 +52,24 @@ export const LoginForm = ({ onForgot }) => {
                     type="password"
                     placeholder="••••••••"
                     className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                
                     {...register("password", {
                         required: "La contraseña es obligatoria",
                     })}
                 />
+                {errors.password && (
+                    <p className="text-red-600 text-xs mt-1">{errors.password.message}</p>
+                )}
             </div>
+
+            {/* Error del backend */}
+            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
 
             <button
                 type="submit"
-                disabled={loading}
                 className="w-full bg-main-blue hover:opacity-90 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-200 text-sm"
             >
-                {loading ? "Iniciando sesión..." : "Iniciar sesión"}
+                {loading ? "Iniciando..." : "Iniciar Sesión"}
             </button>
 
             <p className="text-center text-sm">
