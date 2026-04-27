@@ -3,17 +3,23 @@ import axios from 'axios';
 import { useAuthStore } from "../../features/auth/store/authStore.js";
 
 //Instancia de axios
-
 const axiosAuth = axios.create({
     baseURL: import.meta.env.VITE_AUTH_URL,
-    timeout: 8800,
+    timeout: 8000,
+    headers: {
+        "Content-Type": "application/json",
+    }
+});
+
+const axiosAdmin = axios.create({
+    baseURL: import.meta.env.VITE_ADMIN_URL,
+    timeout: 8000,
     headers: {
         "Content-Type": "application/json",
     }
 });
 
 //Configuracion de interceptores para manejar tokens y errores
-
 axiosAuth.interceptors.request.use( (config)=> {
     config._axiosClient = "auth";
     const token = useAuthStore.getState().token;
@@ -21,6 +27,17 @@ axiosAuth.interceptors.request.use( (config)=> {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
+});
+
+axiosAdmin.interceptors.request.use((config) => {
+  // Tag del cliente para que el interceptor de refresh reintente
+  // en el mismo "backend" (auth vs admin).
+  config._axiosClient = "admin";
+  const token = useAuthStore.getState().token;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 // configuración de documentación axios
@@ -107,9 +124,8 @@ const handleRefreshToken = async function (_error) {
  
 axiosAuth.interceptors.response.use((res) => res, handleRefreshToken);
  
-// axiosAdmin.interceptors.response.use((res) => res, handleRefreshToken);
+axiosAdmin.interceptors.response.use((res) => res, handleRefreshToken);
  
 // ================= EXPORT AXIOS =================
-//export { axiosAuth, axiosAdmin };
-export { axiosAuth };
+export { axiosAuth, axiosAdmin };
 export { handleRefreshToken };
