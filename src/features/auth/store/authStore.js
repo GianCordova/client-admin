@@ -32,7 +32,7 @@ export const useAuthStore = create(
                         expiresAt: null,
                         isAuthenticated:false,
                         isLoadingAuth:false,
-                        erro: "No tienes permiso para acceder como administrador"
+                        error: "No tienes permiso para acceder como administrador"
                     })
                 }
             },
@@ -44,6 +44,7 @@ export const useAuthStore = create(
                     refreshToken: null,
                     expiresAt: null,
                     isAuthenticated: false,
+                    error: null,
                 })
             },
 
@@ -68,7 +69,7 @@ export const useAuthStore = create(
                     });
 
                     toast.error(message);
-                    return {succes: false, error: message};
+                    return {success: false, error: message};
                 }
 
                 set(
@@ -82,11 +83,21 @@ export const useAuthStore = create(
                     }
                 );
                 
-                return {succes: true}
+                return {success: true}
 
             },
             // ----------------------------------------------------------------
         }),
-        {name: "auth-store"}
+        {
+            name: "auth-store",
+            // Solo guarda el usuario y los tokens, ignora el 'error' y 'loading'
+            partialize: (state) => ({
+                user: state.user,
+                token: state.token,
+                refreshToken: state.refreshToken,
+                expiresAt: state.expiresAt,
+                isAuthenticated: state.isAuthenticated
+            }),
+        }
     )
 );
