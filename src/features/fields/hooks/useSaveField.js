@@ -1,33 +1,28 @@
-import { useFieldStore } from '../../users/store/adminStore';
+import { useFieldsStore } from "../../users/store/adminStore";
 
 export const useSaveField = () => {
+  const createField = useFieldsStore((state) => state.createField);
+  const updateField = useFieldsStore((state) => state.updateField);
 
-    //Recuperacion de funciones para el hook
-    const createField = useFieldStore((state) => state.createField);
-    const updateField = useFieldStore((state) => state.updateField);
+  const saveField = async (data, fieldId = null) => {
+    const formData = new FormData();
 
-    const saveField = async (data, fieldId = null) => {
+    formData.append("fieldName", data.fieldName);
+    formData.append("fieldType", data.fieldType);
+    formData.append("capacity", data.capacity);
+    formData.append("pricePerHour", data.pricePerHour);
+    formData.append("description", data.description);
 
-        const fromData = new FormData();
-
-        fromData.append("fieldName", data.fieldName);
-        fromData.append("fieldType", data.fieldType);
-        fromData.append("capacity", data.capacity);
-        fromData.append("pricePerHour", data.pricePerHour);
-        fromData.append("description", data.description);
-
-        if (data.photo?.length > 0) {
-            fromData.append("image", data.photo[0]);
-        }
-
-        if(fieldId) {
-            await updateField(fieldId, formData);
-        }else {
-            await createField(formData);
-        }
-
+    if (data.photo?.length > 0) {
+      formData.append("image", data.photo[0]);
     }
 
-    return { saveField };
+    if (fieldId) {
+      await updateField(fieldId, formData);
+    } else {
+      await createField(formData);
+    }
+  };
 
-}
+  return { saveField };
+};
